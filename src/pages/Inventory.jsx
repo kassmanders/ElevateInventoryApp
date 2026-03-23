@@ -5,7 +5,7 @@ function Inventory() {
 
   const addItem = async () => {
     try {
-      await addDoc(collection(db, "inventory"), {
+      await addDoc(collection(db, "Inventory"), {
         name: "Test Chair",
         category: "Furniture",
         inInventory: true,
