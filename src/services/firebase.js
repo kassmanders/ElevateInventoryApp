@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,7 +9,6 @@ import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyBKksSFhglIypszaOJ2ZRnq6OKcJHkYMwI",
   authDomain: "elevate-inventory-f0638.firebaseapp.com",
-  databaseURL: "https://elevate-inventory-f0638-default-rtdb.firebaseio.com",
   projectId: "elevate-inventory-f0638",
   storageBucket: "elevate-inventory-f0638.firebasestorage.app",
   messagingSenderId: "420666212578",
@@ -19,6 +18,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-export default app;
-export const db = getFirestore(app);
+const analytics = getAnalytics(app);
