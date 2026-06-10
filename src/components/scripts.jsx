@@ -1,10 +1,10 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, getDocs, where } from "firebase/firestore";
 import { db } from "../services/firebase";
 
-function Inventory() {
 
-  const addItem = async () => {
+export async function addItem() {
   
+    console.log("Adding item...");
       try {
         const docRef = await addDoc(collection(db, "Inventory"), {
           Amount: 1,
@@ -22,7 +22,7 @@ function Inventory() {
           
   };
   
-  const removeItem = async (id) => {
+export async function  removeItem (id) {
   
     try {
       await deleteDoc(doc(db, "Inventory", id));
@@ -31,10 +31,10 @@ function Inventory() {
     catch (e) {}
   };
   
-  const checkItem = async (code) => {
+export async function checkItem () {
   
     try {
-      const querySnapshot = await getDocs(collection(db, "Inventory"), where("QR Code", "==", code));
+      const querySnapshot = await getDocs(collection(db, "Inventory")/*, where("QR Code", "==", code)*/);
       if (!querySnapshot.empty) {
         const itemData = querySnapshot.docs[0].data();
         console.log("Item found: ", itemData);
@@ -47,11 +47,6 @@ function Inventory() {
     }
     catch (e) {}
   };
-  
-  
-
-}
-
 
 
   /* 

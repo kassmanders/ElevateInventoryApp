@@ -1,5 +1,4 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import { addItem, removeItem, checkItem } from '../components/scripts';
 
 function Inventory() {
 
