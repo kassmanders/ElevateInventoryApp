@@ -2,20 +2,21 @@ import { collection, addDoc, deleteDoc, doc, getDocs, where } from "firebase/fir
 import { db } from "../services/firebase";
 
 
-export async function addItem() {
+export async function addItem(item) {
   
     console.log("Adding item...");
       try {
         const docRef = await addDoc(collection(db, "Inventory"), {
-          Amount: 1,
-          Categories: [],
-          Description: "Item description", 
-          Location: "",
-          Name: "",
-          QRCode: "unique-code-123",
-          UPC: "",
+          Amount: Number(item.Amount) || 1,
+          Categories: item.Categories || [],
+          Description: item.Description || "", 
+          Location: item.Location || "",
+          Name: item.Name || "",
+          QRCode: item.QRCode || "",
+          UPC: item.UPC || "",
         });
         console.log("Document written with ID: ", docRef.id);
+        return docRef.id;
       } catch (e) {
         console.error("Error adding document: ", e);
       }
