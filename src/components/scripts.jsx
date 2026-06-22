@@ -1,42 +1,28 @@
 import { collection, addDoc, deleteDoc, doc, getDocs, where } from "firebase/firestore";
 import { db } from "../services/firebase";
-// Database WIP
-// addItem
-// -check for dupes/add to existing
 
-// checkItem 
-// -display Inventory(total vs per location)
-// -UI for display
- 
-// removeItem
-// -check for negatives
-// -zeroed 
 
-export async function addItem() {
-
-    /*
-      check by UPC or by QR
-      QR can have multiple UPC's
-
-      
-    */
+export async function addItem(item) {
   
+    console.log("Adding item...");
       try {
-        const docRef = await addDoc(collection(db, "Inventory"), {
-          Amount: 1,
-          Categories: [],
-          Description: "Item description", 
-          Location: "",
-          Name: "",
-          QRCode: "unique-code-123",
-          UPC: "",
-        });
+        const docRef = await checkItem(item.QRCode);
+        // const docRef = await addDoc(collection(db, "Inventory"), {
+        //   Amount: Number(item.Amount) || 1,
+        //   Categories: item.Categories || [],
+        //   Description: item.Description || "", 
+        //   Location: item.Location || "",
+        //   Name: item.Name || "",
+        //   QRCode: item.QRCode || "",
+        //   UPC: item.UPC || "",
+        // });
         console.log("Document written with ID: ", docRef.id);
+        return docRef.id;
       } catch (e) {
         console.error("Error adding document: ", e);
       }
-            
-    };
+          
+  };
   
 export async function  removeItem (id) {
   
