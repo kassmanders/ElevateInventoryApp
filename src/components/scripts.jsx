@@ -6,15 +6,16 @@ export async function addItem(item) {
   
     console.log("Adding item...");
       try {
-        const docRef = await addDoc(collection(db, "Inventory"), {
-          Amount: Number(item.Amount) || 1,
-          Categories: item.Categories || [],
-          Description: item.Description || "", 
-          Location: item.Location || "",
-          Name: item.Name || "",
-          QRCode: item.QRCode || "",
-          UPC: item.UPC || "",
-        });
+        const docRef = await checkItem(item.QRCode);
+        // const docRef = await addDoc(collection(db, "Inventory"), {
+        //   Amount: Number(item.Amount) || 1,
+        //   Categories: item.Categories || [],
+        //   Description: item.Description || "", 
+        //   Location: item.Location || "",
+        //   Name: item.Name || "",
+        //   QRCode: item.QRCode || "",
+        //   UPC: item.UPC || "",
+        // });
         console.log("Document written with ID: ", docRef.id);
         return docRef.id;
       } catch (e) {

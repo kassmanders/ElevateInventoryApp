@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { addItem, removeItem, checkItem } from '../components/scripts';
 
 function Inventory() {
-
+  
   const emptyItem = {
     Name: "",
     Description: "",
@@ -32,8 +32,9 @@ function Inventory() {
       Categories: item.Categories
         .split(",")
         .map((category) => category.trim())
-        .filter((category) => category !== ""),
-    });
+        .filter((category) => category !== ""), 
+      
+      });
 
     setItem(emptyItem);
   };
