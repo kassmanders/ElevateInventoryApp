@@ -1,13 +1,14 @@
-import { collection, addDoc, deleteDoc, doc, getDocs, where } from "firebase/firestore";
+import { collection, addDoc, updateDoc, increment, query, deleteDoc, doc, getDocs, where } from "firebase/firestore";
 import { db } from "../services/firebase";
 
 
 export async function addItem(item) {
+  const InventoryRef = collection(db, "Inventory");
   
     console.log("Adding item...");
       try {
         const docRef = await checkItem(item.QRCode);
-        // const docRef = await addDoc(collection(db, "Inventory"), {
+        // const docRef = await addDoc(InventoryRef, {
         //   Amount: Number(item.Amount) || 1,
         //   Categories: item.Categories || [],
         //   Description: item.Description || "", 
@@ -32,13 +33,29 @@ export async function  removeItem (id) {
     }
     catch (e) {}
   };
-  
-export async function checkItem () {
+
+  export async function incrementItemAmount (id, amount = 1) {
+    const InventoryRef = doc(db, "Inventory", id);
+
+    try {
+      await updateDoc(InventoryRef, {
+        Amount: increment(amount),
+      });
+      console.log("Item amount incremented by", amount);
+    } catch (e) {
+      console.error("Error incrementing item amount: ", e);
+    }
+  }
+
+export async function checkItem (code) {
+  const InventoryRef = collection(db, "Inventory");
   
     try {
-      const querySnapshot = await getDocs(collection(db, "Inventory")/*, where("QR Code", "==", code)*/);
+      const q = query(InventoryRef, where("QRCode", "==", code));
+      const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
-        const itemData = querySnapshot.docs[0].data();
+        const itemDoc = querySnapshot.docs[0];
+        const itemData = { id: itemDoc.id, ...itemDoc.data() };
         console.log("Item found: ", itemData);
         return itemData;
       } else {
