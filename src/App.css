@@ -1,38 +1,125 @@
-.App {
-  text-align: center;
+:root {
+  --color-background: #faf8f5;
+  --color-surface: #ffffff;
+  --color-primary: #2f2a26;
+  --color-secondary: #7a7168;
+  --color-accent: #c9ae8b;
+  --color-accent-light: #efe8dc;
+  --color-border: #e4ddd3;
+  --color-success: #7a8f75;
+
+  --font-main: Arial, sans-serif;
+  --shadow-soft: 0 3px 12px rgba(47, 42, 38, 0.08);
+  --radius-card: 14px;
+  --radius-button: 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: var(--color-background);
+  color: var(--color-primary);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app-layout {
   min-height: 100vh;
+}
+
+.app-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 18px;
+  padding: 18px 28px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.app-header p {
+  margin: 4px 0 0;
+  color: var(--color-secondary);
+}
+
+.burger-button {
+  min-width: 48px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-button);
+  background: var(--color-primary);
   color: white;
+  font-size: 22px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.burger-button:hover {
+  background: var(--color-accent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.side-menu {
+  width: 230px;
+  padding: 16px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.side-menu a {
+  display: block;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  color: var(--color-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.side-menu a:hover {
+  background: var(--color-accent-light);
+}
+
+.app-content {
+  padding: 28px;
+}
+
+.page-card {
+  background: var(--color-surface);
+  padding: 24px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  max-width: 900px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.form-grid input {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.primary-button {
+  margin-top: 18px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-button);
+  background: var(--color-success);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #667b62;
 }
